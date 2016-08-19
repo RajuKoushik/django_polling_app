@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 
 from django.shortcuts import get_object_or_404 , render
-from .models import Question
+from .models import Question, Choice
 
 
 def index(request):
@@ -16,10 +16,10 @@ def index(request):
 #These polls have an argument, something different and new
 
 def choiceindex(request):
-	latest_question_list = Question.objects.order_by('-pub_date')[:5]
+	trending_choice_list = Choice.objects.order_by('votes')[:5]
 
 	template = loader.get_template('polls/index.html')
-	context  = RequestContext(request,{'latest_question_list' : latest_question_list,})
+	context  = RequestContext(request,{'trending_choice_list' : trending_choice_list,})
 	#the context is a dictionary mapping template variable names to python objects
 	return HttpResponse(template.render(context))
 
