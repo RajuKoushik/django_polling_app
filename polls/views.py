@@ -18,10 +18,10 @@ def index(request):
 def choiceindex(request):
 	trending_choice_list = Choice.objects.order_by('votes')[:5]
 
-	template = loader.get_template('polls/index.html')
-	context  = RequestContext(request,{'trending_choice_list' : trending_choice_list,})
+	template1 = loader.get_template('polls/choiceindex.html')
+	context1  = RequestContext(request,{'trending_choice_list' : trending_choice_list,})
 	#the context is a dictionary mapping template variable names to python objects
-	return HttpResponse(template.render(context))
+	return HttpResponse(template1.render(context1))
 
 def detail(request , question_id):
 	question  = get_object_or_404(Question, pk = question_id)
