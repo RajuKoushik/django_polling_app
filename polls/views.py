@@ -6,7 +6,7 @@ from .models import Question
 
 
 def index(request):
-	latest_question_list = Question.objects.order_by,('-pub_date')[:5]
+	latest_question_list = Question.objects.order_by('-pub_date')[:5]
 
 	template = loader.get_template('polls/index.html')
 	context  = RequestContext(request,{'latest_question_list' : latest_question_list,})
@@ -14,6 +14,14 @@ def index(request):
 	return HttpResponse(template.render(context))
 
 #These polls have an argument, something different and new
+
+def choiceindex(request):
+	latest_question_list = Question.objects.order_by('-pub_date')[:5]
+
+	template = loader.get_template('polls/index.html')
+	context  = RequestContext(request,{'latest_question_list' : latest_question_list,})
+	#the context is a dictionary mapping template variable names to python objects
+	return HttpResponse(template.render(context))
 
 def detail(request , question_id):
 	question  = get_object_or_404(Question, pk = question_id)
