@@ -7,6 +7,7 @@ class Question(models.Model):
     def __str__(self):
     	return self.question_text
 
+
     #adding a custom database
     
     def was_published_recently(self):
@@ -20,3 +21,6 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __str__(self):
     	return self.choice_text
+
+    def choice_set(self):
+        return self.choice_text
