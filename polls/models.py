@@ -24,3 +24,4 @@ class Choice(models.Model):
 
     def choice_set(self):
         return self.choice_text
+
