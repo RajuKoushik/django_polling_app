@@ -1,8 +1,9 @@
-from django.http import Http404,HttpResponse
+from django.http import Http404,HttpResponse,HttpResponseRedirect
 from django.template import RequestContext, loader
 
 from django.shortcuts import get_object_or_404 , render
 from .models import Question, Choice
+from django.core.urlresolvers import reverse
 
 
 
@@ -37,6 +38,7 @@ def results(request , question_id):
 	return HttpResponse(response % question_id)
 
 def vote(request, question_id):
+
 	p = get_object_or_404(Question,pk=question_id)
 	try:
 		selected_choice = p.choice_set.get(pk=request.POST['choice'])
@@ -44,5 +46,6 @@ def vote(request, question_id):
 		return render
 
 	return HttpResponse("You are voting on the question %s . " % question_id)
+
 
 
